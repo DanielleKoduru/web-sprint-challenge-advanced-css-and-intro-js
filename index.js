@@ -227,29 +227,24 @@ const artists = [
 
 (1) Name of the first artist (0th index) in the array
 (2) Bio of the third artist (2nd index) in the array */
-for (let i = 0; i < artists.length; i++) {
-  if (artists[i].name === [0]);
-}
 console.log(artists[0].name);
 
-for (let i = 0; i < artists.length; i++) {
-  if (artists[i].bio === [2]);
-}
 console.log(artists[2].bio);
 
 /* Task 2: There is a typo in your dataset 😱 The 9th artist, Vincent Van Gogh is currently Vincent Van Dough. Use an array method to fix this issue and console.log() to check your work. */
+artists.splice(8, 2, {
+  id: 8,
+  name: "Vincent van Gogh",
+  years: "1853 - 1890",
+  genre: "Post-Impressionism",
+  nationality: "Dutch",
+  bio:
+    "Vincent Willem van Gogh (Dutch: [ˈvɪnsɛnt ˈʋɪləm vɑŋ ˈɣɔx] (listen); 30 March 1853 – 29 July 1890) was a Dutch Post-Impressionist painter who is among the most famous and influential figures in the history of Western art. In just over a decade he created about 2,100 artworks, including around 860 oil paintings, most of them in the last two years of his life. They include landscapes, still lifes, portraits and self-portraits, and are characterised by bold colours and dramatic, impulsive and expressive brushwork that contributed to the foundations of modern art. However, he was not commercially successful, and his suicide at 37 followed years of mental illness and poverty.",
+  wikipedia: "http://en.wikipedia.org/wiki/Vincent_van_Gogh",
+  paintings: 877,
+});
 
-// first try at this task.
-// function changeValue(obj, name, newValue) {
-//   obj[name] = newValue;
-// }
-// changeValue(artists, "name", "Vincent Van Gogh");
-// console.log(artists.name);
-
-// console.log(artists, "name");
-
-artists.splice(8, 1, "Vincent Van Gogh");
-console.log(artists, name);
+console.log(artists);
 
 /* Task 3: Create a function called `getArtistByIndex` that takes two arguments:
  *     (1) artists array
@@ -263,15 +258,31 @@ function getArtistByIndex(array, index) {
   return array[index];
 }
 console.log(getArtistByIndex(artists, 0));
-/**
-
 
 /* Task 4: Create a function called get20s() that takes data as an argument and returns an array with names of artists who were born in and died in 20th century (1900-2000) example born in 1901 and died in 1959 - included / born in 1889 and died in 1925 not included - should return ["Salvador Dali", "Frida Kahlo"]*/
 
-// function get20s(arr, yearBorn, yearDied) {
-//   return
-// }
-// console.log(artists.years());
+function get20s(arr) {
+  // create a variable to hold final results
+  const results = [];
+  // Create a for loop to loop through arr
+  for (let i = 0; i < arr.length; i++) {
+    // create birth and death var that will contain value
+    // use slice method to remove spaces and dash from the year
+    const birth = parseInt(arr[i].years.slice(0, 4));
+    const death = parseInt(arr[i].years.slice(7, 11));
+    // convert birth and death from string to integer
+    // create if statement
+    // check if birth >= 1900 and if death if <= 2000
+    // push birth and death results to a new variable using .push method
+    if (birth >= 1900 && death <= 2000) {
+      results.push(arr[i].name);
+    }
+  }
+  // return new variable that holds final results
+  return results;
+  // console.log
+}
+console.log(get20s(artists));
 
 /* Task 5: Create a function called `removeArtist` that takes two arguments:
  *     (1) artists array
@@ -284,11 +295,11 @@ console.log(getArtistByIndex(artists, 0));
  * Note that sucessfully invoking this function multiple times without refreshing your browser will continuously remove artists from the array until there are none left. If you refresh your browser, the data will reset.
  */
 
-function removeArtist(artists) {
-  artists.splice(0, 1);
+function removeArtist(artists, index) {
+  artists.splice(index, 1);
   return artists;
 }
-console.log(removeArtist(artists));
+console.log(removeArtist(artists, 0));
 
 /**
 /* Task 6: Create a function called `addArtist` that can accept an object of information and add it to the artists array. Then, add a 21st artist to the array (you) with custom information!👩‍🎨👨‍🎨
@@ -303,8 +314,8 @@ bio: Add 1-2 sentences (or use lorem ipsum)
 
 At the end, this function should return the new array with information added"*/
 
-function addArtist(id, name, years, genre, nationality, bio) {
-  return {
+function addArtist(arr, id, name, years, genre, nationality, bio) {
+  var newArtist = {
     id: id,
     name: name,
     years: years,
@@ -312,17 +323,18 @@ function addArtist(id, name, years, genre, nationality, bio) {
     nationality: nationality,
     bio: bio,
   };
+  arr.push(newArtist);
 }
-const artistsDanielle = addArtist(
-  30,
+addArtist(
+  artists,
+  19,
   "Danielle Koduru",
   "April 28, 1990",
   "web design",
   "American",
   "Danielle is a stay at home mom to two kids. She is enjoying her time at lambda as she learns more about web development"
 );
-console.log(artistsDanielle);
-
+console.log("task 6", artists);
 /* Task 7: Create a function called lotsOfArt() that takes one argument: 
 
     (1) artists array 
@@ -332,10 +344,17 @@ and returns an array with names of artists who painted more than 100 paintings.
 For example lotsOfArt(artists); will return ["Amedeo Modigliani", "Rene Magritte", ..."Albrecht Dürer"]*/
 
 function lotsOfArt(artists) {
-  for (let paintings in artists >100){
-    return artists.paintings;
+  let newLotsOfArt = [];
+  for (let i = 0; i < artists.length; i++) {
+    // artists[i].paintings;
+
+    if (artists[i].paintings > 100) {
+      newLotsOfArt.push(artists[i].name);
+    }
   }
-  console.log(lotsOfArt(artists));
+  return newLotsOfArt;
+}
+console.log("lotsOfArtFunction", lotsOfArt(artists));
 
 // 🎨🎨 STRETCH 🎨🎨//
 
@@ -369,4 +388,4 @@ function randomize(/* Code here */) {
   /* Code here */
 }
 
-// /* STRETCH 3: Use advanced array methods (.map, .reduce, .filer) to refactor your MVP code (create an array of all artists born in the 1900s with .filter, for example) */
+/*STRETCH 3: Use advanced array methods (.map, .reduce, .filer) to refactor your MVP code (create an array of all artists born in the 1900s with .filter, for example) */

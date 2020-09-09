@@ -29,7 +29,7 @@ Be prepared to demonstrate your understanding of this week's concepts by answeri
     2. Make sure my website has colors that wouldnt hinder those who are color blind (i.e. green and red)
     3. Make sure my font/text is able to be adjusted properly for those who are hard of hearing.-->
 3. How would you explain the concept of a variable to someone new to programming?
-<!-- A variable is something that holds data value and can be changed or updated. -->
+<!-- A variable is something that holds data value and can be changed or updated throughout. -->
 4. What is the purpose of using functions in code?
 <!-- functions combine many instructions into a single line of code. they run many steps in a small amoun of code. -->
 
